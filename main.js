@@ -10,6 +10,7 @@ const video = document.getElementById('video');
 const SQUINTED_EYES_DURATION = 1000
 const narrow_eyes = document.getElementById("narrow-eyes")
 const NARROWEST_EYES = 5.2
+const scroll_pixels = 400;
 let narrow_eyes_value = NARROWEST_EYES + parseInt(narrow_eyes.value)/10;
 console.log(narrow_eyes_value)
 
@@ -74,9 +75,10 @@ async function main() {
 
                 if (duration > SQUINTED_EYES_DURATION) {
                     
-                    window.scrollBy({ top: 300, behavior: 'smooth' });
+                    window.scrollBy({ top: scroll_pixels, behavior: 'smooth' });
 
                     eyeClosedStart = null; // reset after alert
+                    setTimeout(()=>{}, 100)
                 }
             } else {
                 eyeClosedStart = null; // reset if eyes open again
