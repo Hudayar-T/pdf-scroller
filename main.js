@@ -258,6 +258,8 @@ function renderPage(pageNum) {
         else pdfContainer.appendChild(div);
 
     });
+
+    currentPageDisplay.innerText = visiblePages[visiblePages.length -1]
 }
 
 function removePage(pageNum) {
