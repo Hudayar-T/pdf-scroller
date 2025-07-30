@@ -330,7 +330,8 @@ pageInput.addEventListener("keydown", (event) => {
 });
 
 function estimateScrollDuration(pixels) {
-    const baseSpeed = 0.8; // pixels per ms (tweak this for your case)
-    // console.log(Math.min(1000, Math.max(200, Math.abs(pixels) / baseSpeed)))
-    return Math.min(1000, Math.max(200, Math.abs(pixels) / baseSpeed));
+    //const baseSpeed = 0.8;
+    //return Math.min(1000, Math.max(200, Math.abs(pixels) / baseSpeed));
+
+    return 500; //500ms for universality
 }
