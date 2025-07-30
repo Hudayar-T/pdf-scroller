@@ -7,18 +7,19 @@ import {
 } from '@tensorflow-models/face-landmarks-detection';
 
 const video = document.getElementById('video');
-const SQUINTED_EYES_DURATION = 1000
-const narrow_eyes = document.getElementById("narrow-eyes")
-const NARROWEST_EYES = 5.2
+const sensitivity = document.getElementById("sensitivity")
+let sensitivity_value = calculateSensitivity(sensitivity.value)
 const scroll_amount = document.getElementById("scroll-amount")
 
 let scroll_pixels = 300+parseInt(scroll_amount.value)*4;
-// let scroll_pixels = 100;
-let narrow_eyes_value = NARROWEST_EYES + parseInt(narrow_eyes.value)/10;
-// console.log(narrow_eyes_value)
 
 let isPaused = false;
 let DO_NOT_RENDER = false;
+
+function calculateSensitivity(sensitivity)
+{
+    return (31-sensitivity)/2;
+}
 
 async function setupCamera() {
   const stream = await navigator.mediaDevices.getUserMedia({
@@ -61,7 +62,7 @@ async function main() {
       const upperLip = keypoints[13];
       const lowerLip = keypoints[14];
 
-      const mouthOpen = getDistance(upperLip, lowerLip) > 2; // tweak threshold if needed
+      const mouthOpen = getDistance(upperLip, lowerLip) > sensitivity_value; // tweak threshold if needed
 
       if (mouthOpen) {
         // if (!mouthOpenStart) mouthOpenStart = Date.now();
@@ -105,8 +106,8 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
-narrow_eyes.addEventListener("input", () => {
-    narrow_eyes_value = NARROWEST_EYES + parseInt(narrow_eyes.value) / 10;
+sensitivity.addEventListener("input", () => {
+    sensitivity_value = calculateSensitivity(sensitivity.value);
 });
 
 scroll_amount.addEventListener("input", () => {
@@ -330,6 +331,6 @@ pageInput.addEventListener("keydown", (event) => {
 
 function estimateScrollDuration(pixels) {
     const baseSpeed = 0.8; // pixels per ms (tweak this for your case)
-    console.log(Math.min(1000, Math.max(200, Math.abs(pixels) / baseSpeed)))
+    // console.log(Math.min(1000, Math.max(200, Math.abs(pixels) / baseSpeed)))
     return Math.min(1000, Math.max(200, Math.abs(pixels) / baseSpeed));
 }
