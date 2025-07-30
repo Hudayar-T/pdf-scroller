@@ -24,6 +24,9 @@ body {
       display: block;
       margin: 10px auto;
     }
+    .page{
+      margin: 10px auto;
+    }
     #upload-modal {
       position: fixed;
       top: 0;
