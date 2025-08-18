@@ -69,7 +69,7 @@ async function main() {
         // const duration = Date.now() - mouthOpenStart;
         let delay = Date.now() - lastScrolled;
 
-        if (delay > 500) { // half second of open mouth
+        if (delay > 600) { // half second of open mouth
           lastScrolled = Date.now();
           // alert('Mouth opened!');
           let before_scrolling = window.scrollY;
@@ -333,5 +333,5 @@ function estimateScrollDuration(pixels) {
     //const baseSpeed = 0.8;
     //return Math.min(1000, Math.max(200, Math.abs(pixels) / baseSpeed));
 
-    return 500; //500ms for universality
+    return 480; //500ms for universality
 }
