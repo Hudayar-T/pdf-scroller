@@ -67,17 +67,11 @@ document.addEventListener('DOMContentLoaded', function(){
         const mouthOpen = getDistance(upperLip, lowerLip) > sensitivity_value; // tweak threshold if needed
 
         if (mouthOpen) {
-            // if (!mouthOpenStart) mouthOpenStart = Date.now();
-            // const duration = Date.now() - mouthOpenStart;
             let delay = Date.now() - lastScrolled;
 
             if (delay > 600) { // half second of open mouth
             lastScrolled = Date.now();
-            // alert('Mouth opened!');
             let before_scrolling = window.scrollY;
-            // if(window.scrollY)
-            console.log("Right now at: " + before_scrolling)
-            console.log("Gonna be at: " + (before_scrolling + scroll_pixels))
             DO_NOT_RENDER = true;
             window.scrollBy({ top: scroll_pixels, behavior: 'smooth' });
             setTimeout(() => {
@@ -174,7 +168,6 @@ document.addEventListener('DOMContentLoaded', function(){
         pdfContainer.innerHTML = "";
         canvasMap.clear();
         visiblePages = [];
-        currentScroll = 0;
         window.scrollTo(0, 0);
     }
 
@@ -234,7 +227,6 @@ document.addEventListener('DOMContentLoaded', function(){
         if (canvasMap.has(pageNum)) return;
         visiblePages.push(pageNum);
         visiblePages.sort(function(a, b){return a - b});
-        console.log(visiblePages)
         pdfDoc.getPage(pageNum).then((page) => {
             const viewport = page.getViewport({ scale });
             const canvas = document.createElement("canvas");
@@ -250,10 +242,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
             const div = document.createElement('div');
             div.appendChild(canvas)
-            // div.innerHTML = div.innerHTML + '<p style="margin: 50%">'+ pageNum +'</p>'
-            // console.log(div.innerHTML)
-
-            // console.log(canvasMap.get(pageNum+1))
             if(pageNum == visiblePages[0] && canvasMap.get(pageNum+1)) pdfContainer.insertBefore(div, canvasMap.get(pageNum+1).parentNode);
             else pdfContainer.appendChild(div);
 
@@ -276,7 +264,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
     function onScroll() {
     if(DO_NOT_RENDER) return;
-    console.log("scrolling?");
     let body_height = document.body.offsetHeight;
     let scroll_y = window.scrollY;
     let scrolled_percentage = scroll_y / body_height * 100;
@@ -284,16 +271,13 @@ document.addEventListener('DOMContentLoaded', function(){
     let first = visiblePages[0];
     let last = visiblePages[visiblePages.length-1];
 
-        if (scrolled_percentage < 25 && first > 1){// && Date.now() - lastRendered > 500) {
+        if (scrolled_percentage < 25 && first > 1){
             renderPage(first - 1);
             if (visiblePages.length > NUM_PAGES_TO_KEEP) {
                 removePage(last);
             }
-            // lastRendered = Date.now();
         }
-        // console.log(last)
-        if (scrolled_percentage > 75 && last < pdfDoc.numPages){//  && Date.now() - lastRendered > 600) {
-            // console.log(Date.now() - lastRendered)
+        if (scrolled_percentage > 75 && last < pdfDoc.numPages){
             renderPage(last + 1);
             if (visiblePages.length > NUM_PAGES_TO_KEEP) {
                 removePage(first);
