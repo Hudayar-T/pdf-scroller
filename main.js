@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function(){
     let visiblePages = [];
     const canvasMap = new Map();
 
-    const NUM_PAGES_TO_KEEP = 10;
+    const NUM_PAGES_TO_KEEP = 7;
     let scale = 1.35;
 
     function handlePDFUpload(file) {
