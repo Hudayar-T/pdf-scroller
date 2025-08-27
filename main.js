@@ -13,10 +13,13 @@ document.addEventListener('DOMContentLoaded', function(){
     let sensitivity_value = calculateSensitivity(sensitivity.value)
     const scroll_amount = document.getElementById("scroll-amount")
 
-    let scroll_pixels = 300+parseInt(scroll_amount.value)*4;
+    let scroll_pixels = 300+parseInt(scroll_amount.value)*20;
 
     let isPaused = false;
     let DO_NOT_RENDER = false;
+
+    const scroll_line = document.getElementById('scroll-line');
+    adjustScrollLine();
 
     function calculateSensitivity(sensitivity)
     {
@@ -106,7 +109,8 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 
     scroll_amount.addEventListener("input", () => {
-        scroll_pixels = 300 + parseInt(scroll_amount.value) * 40;
+        scroll_pixels = 200 + parseInt(scroll_amount.value) * 20;
+        adjustScrollLine();
     });
 
 
@@ -317,6 +321,11 @@ document.addEventListener('DOMContentLoaded', function(){
         //return Math.min(1000, Math.max(200, Math.abs(pixels) / baseSpeed));
 
         return 480; //500ms for universality
+    }
+
+    function adjustScrollLine()
+    {
+        scroll_line.style.top = 'calc(' + scroll_pixels + 'px + 17vh)';
     }
 })
     
