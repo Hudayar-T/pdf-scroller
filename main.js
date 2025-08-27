@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     function calculateSensitivity(sensitivity)
     {
-        return (31-sensitivity)/2;
+        return (38-sensitivity)/2;
     }
 
     async function setupCamera() {
