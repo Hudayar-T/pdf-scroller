@@ -66,11 +66,11 @@ video {
   display: none;
 }
 #scroll-line, #read-line{
-  height: 2px;
+  height: 1.5px;
   background-color: gray;
   width: 100%;
   position: fixed;
-  opacity: 0.4;
+  opacity: 0.35;
   font-size: 12px;
   padding: 0 20px;
   justify-content: space-between;
@@ -86,14 +86,14 @@ video {
 .writing{
   background-color: white;
   display: inline-block;
-  height: 750%;
+  height: 1000%;
   padding: 4px;
   /* margin-bottom: 1%; */
   color: rgb(66, 13, 13);
 }
 .writing1{
-  margin-left: 5vw;
+  margin-left: 7vw;
 }
 .writing2{
-  margin-right: 5vw;
+  margin-right: 7vw;
 }
